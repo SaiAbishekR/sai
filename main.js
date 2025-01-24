@@ -1,3 +1,12 @@
+// Initialize Elastic APM Agent (must be the first import in the file)
+const apm = require('elastic-apm-node').start({
+    serviceName: 'nodejs-app', // Unique name for the application
+    serverUrl: 'http://<app-lb-507147388.ap-south-1.elb.amazonaws.com>:8200', // Replace with your AWS Load Balancer DNS
+    environment: 'production', // Set the environment (e.g., production, staging, etc.)
+    active: true, // Enable the APM agent
+});
+
+// Import required modules
 const express = require('express');
 const axios = require('axios');
 const app = express();
@@ -8,7 +17,7 @@ const PORT = 3000;
 // Endpoint: /app-1 - Returns the instance public IP
 app.get('/app-1', async (req, res) => {
     try {
-        // Fetch public IP from an external service
+        // Fetch public IP from AWS metadata
         const response = await axios.get('http://169.254.169.254/latest/meta-data/public-ipv4');
         const publicIp = response.data;
         res.send(`Instance Public IP: ${publicIp}`);
