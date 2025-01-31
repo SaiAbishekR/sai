@@ -1,7 +1,7 @@
 // Initialize Elastic APM Agent (must be the first import in the file)
 const apm = require('elastic-apm-node').start({
     serviceName: 'nodejs-app', // Unique name for the application
-    serverUrl: 'http://<app-lb-507147388.ap-south-1.elb.amazonaws.com>:8200', // Replace with your AWS Load Balancer DNS
+    serverUrl: 'https://cb33afd7171d43b2acd77cd0d00b045e.us-east-1.aws.found.io/app/apm:8200', // Replace with your AWS Load Balancer DNS
     environment: 'production', // Set the environment (e.g., production, staging, etc.)
     active: true, // Enable the APM agent
 });
